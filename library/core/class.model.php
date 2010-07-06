@@ -405,6 +405,22 @@ class Gdn_Model extends Gdn_Pluggable {
 			->Set($Column, $Values)
 			->Put();
 	}
+	
+	/**
+    *  Overrides the database prefix for this specific model as opposed to the one used in the config.
+    *  Can be called after the model's __construct()
+    *
+    * @param string $NewPrefix
+    * @return void
+    * @todo refactor
+    */
+   public function OverrideDatabasePrefix($NewPrefix) {
+      $this->Database = clone $this->Database;
+      $this->Database->DatabasePrefix = $NewPrefix;
+      $this->SQL = clone $this->SQL;
+      $this->SQL->Database = $this->Database;
+   }
+	
 }
 
 ?>
